@@ -17,8 +17,8 @@ RUN apt-get update && \
       libmcrypt-dev \
       libpng12-dev \
       libxslt1-dev \
-#      git \
-#      vim \
+      git \
+      vim \
       && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
