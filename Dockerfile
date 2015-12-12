@@ -48,10 +48,9 @@ RUN docker-php-ext-install \
   zip
 
 # http://devdocs.magento.com/guides/v2.0/install-gde/prereq/integrator_install.html
-#
-RUN curl -sS https://getcomposer.org/installer | php && \
-    mv composer.phar /usr/local/bin/composer
-#RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# https://getcomposer.org/download/
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 #RUN curl -sL https://deb.nodesource.com/setup_4.x | bash - \ 
 #  && apt-get install -y nodejs
