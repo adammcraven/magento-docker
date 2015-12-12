@@ -8,7 +8,7 @@ setup_install_magento() {
   /usr/local/bin/composer self-update
   
   echo "==> Performing composer create project"
-  /usr/local/bin/composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition /src
+  /usr/local/bin/composer create-project --repository-url=https://${MAGENTO_PUB_KEY}:${MAGENTO_PRIV_KEY}@repo.magento.com/ magento/project-community-edition /src
   
   chmod +x /src/bin/magento
   
