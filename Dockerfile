@@ -56,7 +56,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 #  && apt-get install -y nodejs
 #RUN npm install -g grunt-cli
 
-# Magento Configuration
+# Entry point
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh 
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
