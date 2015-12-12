@@ -60,8 +60,6 @@ echo "==> BEGIN: docker-entrypoint.sh, with parameters: '$@'"
 
 if [ "$SETUP_INSTALL" = "true" ]; then
   setup_install_magento
-else 
-
 fi
 
 echo "==> END: docker-entrypoint.sh"
