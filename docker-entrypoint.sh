@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 
 composer_self_update() {
@@ -86,16 +86,16 @@ echo "==> BEGIN: docker-entrypoint.sh, with parameters: '$@'"
 if [ "$1" = "setup:install" ]; then
   setup_install
 
-else if [ "$1" = "setup:deploy-sample-data" ]; then
+elif [ "$1" = "setup:deploy-sample-data" ]; then
   setup_deploy_sample_data
 
-else if [ "$1" = "setup:configure" ]; then
+elif [ "$1" = "setup:configure" ]; then
   setup_configure
 
-else if [ "$1" = "setup:update" ]; then
+elif [ "$1" = "setup:update" ]; then
   setup_update
 
-else if [ "$1" = "indexer:reindex" ]; then
+elif [ "$1" = "indexer:reindex" ]; then
   indexer_reindex
 
 fi
