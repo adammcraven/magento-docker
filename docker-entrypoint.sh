@@ -98,6 +98,8 @@ elif [ "$1" = "setup:update" ]; then
 elif [ "$1" = "indexer:reindex" ]; then
   indexer_reindex
 
+else
+  echo "==> Unknown command '$1'"
 fi
 
 echo "==> END: docker-entrypoint.sh"
