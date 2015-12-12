@@ -99,7 +99,7 @@ elif [ "$1" = "indexer:reindex" ]; then
   indexer_reindex
 
 else
-  echo "==> Unknown command '$1'"
+  echo "==> ERROR: Unknown command '$1'"
 fi
 
 echo "==> END: docker-entrypoint.sh"
