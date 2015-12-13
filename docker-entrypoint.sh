@@ -52,10 +52,7 @@ setup_configure() {
 
 create_composer_auth_file() {
   echo "==> BEGIN: create_composer_auth_file()"
-  
-  printenv
-  echo 
-  
+    
   mkdir -p "$HOME/.composer"
   composerConf="$HOME/.composer/auth.json"
   rm -f $composerConf
