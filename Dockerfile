@@ -65,7 +65,9 @@ RUN chmod +x /download-magento.sh && \
 
 # TODO: set permissions too
 
-EXPOSE 80 443
+
+# 9000 = php-fpm
+EXPOSE 9000
 
 
 # Entry point
