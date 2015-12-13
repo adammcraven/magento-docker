@@ -52,7 +52,7 @@ RUN docker-php-ext-install \
 COPY download-magento.sh /
 RUN chmod +x download-magento.sh && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
-    ./download-magento.sh && \
+    /download-magento.sh && \
     chmod +x /src/bin/magento 
 
 # TODO: set permissions too
