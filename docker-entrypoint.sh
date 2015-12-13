@@ -72,13 +72,15 @@ create_composer_auth_file() {
           "username": "$MAGENTO_PUB_KEY",
           "password": "$MAGENTO_PRIV_KEY"
       }
-  },
-  "github-oauth": {
-      "github.com": "$GITHUB_ACCESS_TOKEN"
   }
-}
 EOM
   ) >> $composerConf
+
+  if [ $GITHUB_ACCESS_TOKEN ]; then
+    echo ", \"github-oauth\": { \"github.com\": \"$GITHUB_ACCESS_TOKEN\" }" >> $composerConf
+  fi
+ 
+  echo "}" >> $composerConf
 
   echo "==> END: create_composer_auth_file()"
 }
