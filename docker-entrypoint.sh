@@ -53,8 +53,8 @@ setup_configure() {
 create_composer_auth_file() {
   echo "==> BEGIN: create_composer_auth_file()"
   
-  mkdir -p ~/.composer
-  composeConf="~/.composer/auth.json"
+  mkdir -p /.composer
+  composeConf="/.composer/auth.json"
   rm -f $composerConf
 
   echo "==> Creating the Composer auth json file"
