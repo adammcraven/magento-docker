@@ -50,8 +50,36 @@ setup_configure() {
   echo "==> END: setup_configure()"
 }
 
+create_composer_auth_file() {
+  echo "==> BEGIN: create_composer_auth_file()"
+  
+  mkdir -p ~/.composer
+  composeConf="~/.composer/auth.json"
+  rm -f $composerConf
+
+  echo "==> Creating the Composer auth json file"
+  ( cat <<EOM
+{
+  "http-basic": {
+      "repo.magento.com": {
+          "username": "$MAGENTO_PUB_KEY",
+          "password": "$MAGENTO_PRIV_KEY"
+      }
+  },
+  "github-oauth": {
+      "github.com": "$GITHUB_ACCESS_TOKEN"
+  }
+}
+EOM
+  ) >> $composeConf
+
+  echo "==> END: create_composer_auth_file()"
+}
+
 setup_update() {
   echo "==> BEGIN: setup_update()"
+  create_composer_auth_file
+  
   composer_self_update
   
   echo "==> Performing update"
