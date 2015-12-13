@@ -50,18 +50,18 @@ RUN docker-php-ext-install \
 # http://devdocs.magento.com/guides/v2.0/install-gde/prereq/integrator_install.html
 
 # https://getcomposer.org/download/
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+    /usr/local/bin/composer create-project --repository-url=https://${MAGENTO_PUB_KEY}:${MAGENTO_PRIV_KEY}@repo.magento.com/ magento/project-community-edition /src && \
+    chmod +x /src/bin/magento 
 
-#RUN curl -sL https://deb.nodesource.com/setup_4.x | bash - \ 
-#  && apt-get install -y nodejs
-#RUN npm install -g grunt-cli
+# TODO: set permissions too
+
 
 # Entry point
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh 
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
-CMD [""]
-
+CMD ["run"]
 
 
 

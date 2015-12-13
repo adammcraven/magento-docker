@@ -6,31 +6,13 @@ composer_self_update() {
   /usr/local/bin/composer self-update
 }
 
-setup_install() {
-  echo "==> BEGIN: setup_install()"
-
-  if [ -f /src/app/etc/config.php ] || [ -f /src/app/etc/env.php ]; then
-    echo "==> Already installed? Either app/etc/config.php or app/etc/env.php exist, please remove both files to continue setup."
-    exit
-  fi
-
-  composer_self_update
-  
-  echo "==> Performing composer create project"
-  /usr/local/bin/composer create-project --repository-url=https://${MAGENTO_PUB_KEY}:${MAGENTO_PRIV_KEY}@repo.magento.com/ magento/project-community-edition /src
-  
-  chmod +x /src/bin/magento
-
-  echo "==> END: setup_install()"
-}
-
 setup_deploy_sample_data() {
   echo "==> BEGIN: setup_deploy_sample_data()"
 
   /src/bin/magento sampledata:deploy
 
-  echo "==> Ignore the above error (bug in Magento), fixing with 'composer update'..."
-  composer update
+  #echo "==> Ignore the above error (bug in Magento), fixing with 'composer update'..."
+  #composer update
 
   USE_SAMPLE_DATA=true
 
@@ -39,6 +21,11 @@ setup_deploy_sample_data() {
 
 setup_configure() {
   echo "==> BEGIN: setup_configure()"
+
+#  if [ -f /src/app/etc/config.php ] || [ -f /src/app/etc/env.php ]; then
+#    echo "==> Already configured. Either app/etc/config.php or app/etc/env.php exist, please remove both files to continue setup."
+#    exit -1
+#  fi
 
   if [ "$USE_SAMPLE_DATA" = true ]; then
     USE_SAMPLE_DATA_STRING="--use-sample-data"
@@ -65,7 +52,11 @@ setup_configure() {
 
 setup_update() {
   echo "==> BEGIN: setup_update()"
+  composer_self_update
+  
+  echo "==> Performing update"
   composer update
+  
   echo "==> END: setup_update()"
 }
 
@@ -76,17 +67,27 @@ indexer_reindex() {
   echo "==> END: indexer_reindex()"
 }
 
-  
+run_phpfpm() {
+  echo "==> BEGIN: run()"
+  echo "==> Running php-fpm"
+  php-fpm &
+  pid="$!"
+  echo "==> php-fpm pid: $pid"
+  echo "==> php-fpm is running..."
+  wait "$pid"
+  echo "==> php-fpm has ended"  
+  echo "==> END: run()"
+}
+
+
 #############################################
 ################## Start ####################
 #############################################
-
+echo
+echo "######################################################"
 echo "==> BEGIN: docker-entrypoint.sh, with parameters: '$@'"
 
-if [ "$1" = "setup:install" ]; then
-  setup_install
-
-elif [ "$1" = "setup:deploy-sample-data" ]; then
+if [ "$1" = "setup:deploy-sample-data" ]; then
   setup_deploy_sample_data
 
 elif [ "$1" = "setup:configure" ]; then
@@ -97,6 +98,9 @@ elif [ "$1" = "setup:update" ]; then
 
 elif [ "$1" = "indexer:reindex" ]; then
   indexer_reindex
+
+elif [ "$1" = "run" ]; then
+  run_phpfpm
 
 else
   echo "==> ERROR: Unknown command '$1'"
