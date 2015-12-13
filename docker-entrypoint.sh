@@ -45,6 +45,14 @@ setup_configure() {
     --admin-email=$ADMIN_EMAIL \
     --admin-user=$ADMIN_USER \
     --admin-password=$ADMIN_PASSWORD \
+    --backend-frontname=$BACKEND_FRONTNAME \
+    --language=$LANGUAGE \
+    --currency=$CURRENCY \
+    --timezone=$TIMEZONE \
+    --use-rewrites=$USE_REWRITES \
+    --use-secure=$USE_SECURE \
+    --base-url-secure=$BASE_URL_SECURE \
+    --session-save=$SESSION_SAVE \
     $USE_SAMPLE_DATA_STRING
 
   echo "==> END: setup_configure()"

@@ -55,6 +55,7 @@ RUN chmod +x /download-magento.sh && \
     /download-magento.sh && \
     chmod +x /src/bin/magento 
 # OR This will work with Docker 1.9.0 ;)
+# https://docs.docker.com/engine/reference/builder/#arg
 #ARG MAGENTO_PUB_KEY
 #ARG MAGENTO_PRIV_KEY
 #RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
@@ -64,6 +65,7 @@ RUN chmod +x /download-magento.sh && \
 
 # TODO: set permissions too
 
+EXPOSE 80 443
 
 
 # Entry point
