@@ -54,9 +54,10 @@ create_composer_auth_file() {
   echo "==> BEGIN: create_composer_auth_file()"
   
   printenv
+  echo 
   
-  mkdir -p ~/.composer
-  composeConf="~/.composer/auth.json"
+  mkdir -p "$HOME/.composer"
+  composerConf="$HOME/.composer/auth.json"
   rm -f $composerConf
 
   echo "==> Creating the Composer auth json file"
@@ -77,7 +78,7 @@ create_composer_auth_file() {
   }
 }
 EOM
-  ) >> $composeConf
+  ) >> $composerConf
 
   echo "==> END: create_composer_auth_file()"
 }
