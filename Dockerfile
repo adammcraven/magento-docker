@@ -50,7 +50,7 @@ RUN docker-php-ext-install \
 # http://devdocs.magento.com/guides/v2.0/install-gde/prereq/integrator_install.html
 # https://getcomposer.org/download/
 COPY download-magento.sh /
-RUN chmod +x download-magento.sh && \
+RUN chmod +x /download-magento.sh && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
     /download-magento.sh && \
     chmod +x /src/bin/magento 
