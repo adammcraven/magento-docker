@@ -48,10 +48,11 @@ RUN docker-php-ext-install \
   zip
 
 # http://devdocs.magento.com/guides/v2.0/install-gde/prereq/integrator_install.html
-
 # https://getcomposer.org/download/
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
-    /usr/local/bin/composer create-project --repository-url=https://$MAGENTO_PUB_KEY:$MAGENTO_PRIV_KEY@repo.magento.com/ magento/project-community-edition /src && \
+COPY download-magento.sh /
+RUN chmod +x download-magento.sh && \
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+    ./download-magento.sh && \
     chmod +x /src/bin/magento 
 
 # TODO: set permissions too
