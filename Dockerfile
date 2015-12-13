@@ -58,6 +58,7 @@ RUN chmod +x /download-magento.sh && \
 # TODO: set permissions too
 
 
+
 # Entry point
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh 
