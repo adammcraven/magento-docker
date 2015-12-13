@@ -58,6 +58,10 @@ create_composer_auth_file() {
   rm -f $composerConf
 
   echo "==> Creating the Composer auth json file"
+  echo "==> Using MAGENTO_PUB_KEY='$MAGENTO_PUB_KEY'"
+  echo "==> Using MAGENTO_PRIV_KEY='$MAGENTO_PRIV_KEY'" 
+  echo "==> Using GITHUB_ACCESS_TOKEN='$GITHUB_ACCESS_TOKEN'" 
+ 
   ( cat <<EOM
 {
   "http-basic": {
