@@ -2,9 +2,6 @@ FROM php:7.0-fpm
 
 MAINTAINER Adam Craven <adam@ChannelAdam.com>
 
-ARG MAGENTO_PUB_KEY
-ARG MAGENTO_PRIV_KEY
-
 WORKDIR /src
 
 #
@@ -58,6 +55,8 @@ RUN chmod +x /download-magento.sh && \
     /download-magento.sh && \
     chmod +x /src/bin/magento 
 # OR This will work with Docker 1.9.0 ;)
+#ARG MAGENTO_PUB_KEY
+#ARG MAGENTO_PRIV_KEY
 #RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
 #    /usr/local/bin/composer create-project --repository-url=https://$MAGENTO_PUB_KEY:$MAGENTO_PRIV_KEY@repo.magento.com/ magento/project-community-edition /src && \
 #    chmod +x /src/bin/magento 
