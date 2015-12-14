@@ -9,7 +9,7 @@ composer_self_update() {
 setup_deploy_sample_data() {
   echo "==> BEGIN: setup_deploy_sample_data()"
 
-  /src/bin/magento sampledata:deploy
+  /magento/bin/magento sampledata:deploy
 
   #echo "==> Ignore the above error (bug in Magento), fixing with 'composer update'..."
   #composer update
@@ -22,7 +22,7 @@ setup_deploy_sample_data() {
 setup_configure() {
   echo "==> BEGIN: setup_configure()"
 
-#  if [ -f /src/app/etc/config.php ] || [ -f /src/app/etc/env.php ]; then
+#  if [ -f /magento/app/etc/config.php ] || [ -f /magento/app/etc/env.php ]; then
 #    echo "==> Already configured. Either app/etc/config.php or app/etc/env.php exist, please remove both files to continue setup."
 #    exit -1
 #  fi
@@ -34,7 +34,7 @@ setup_configure() {
   fi
 
   echo "==> Running Magento 2 setup script..."
-  /src/bin/magento setup:install \
+  /magento/bin/magento setup:install \
     --db-host=$DB_HOST \
     --db-name=$DB_NAME \
     --db-user=$DB_USER \
@@ -105,7 +105,7 @@ setup_update() {
 indexer_reindex() {
   echo "==> BEGIN: indexer_reindex()"
   echo "==> Reindexing all indexes..."
-  /src/bin/magento indexer:reindex  
+  /magento/bin/magento indexer:reindex  
   echo "==> END: indexer_reindex()"
 }
 
