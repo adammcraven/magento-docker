@@ -27,8 +27,6 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
 COPY php.ini /usr/local/etc/php/
 COPY php-fpm.conf /usr/local/etc/
 
-# Permissions needed to run proper filesystem permissions when using 'Dinghy' on OS X
-RUN usermod -u 501 www-data
 
 # 9000 = php-fpm
 EXPOSE 9000
@@ -48,9 +46,6 @@ RUN docker-php-ext-install \
   xsl \
   zip
 
-VOLUME ["/magento"]
-WORKDIR /magento
-
 # http://devdocs.magento.com/guides/v2.0/install-gde/prereq/integrator_install.html
 # https://getcomposer.org/download/
 COPY download-magento.sh /
@@ -69,6 +64,8 @@ RUN chmod +x /download-magento.sh && \
 
 # TODO: set permissions too
 
+
+WORKDIR /magento
 
 
 # Entry point
